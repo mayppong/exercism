@@ -38,7 +38,7 @@ defmodule ListOps do
       [item] ->
         f.(item, acc)
       [item | less] ->
-        reduce(less, f.(item,acc), f)
+        f.(item, reduce(less, acc, f))
     end
   end
 
@@ -49,6 +49,6 @@ defmodule ListOps do
 
   @spec concat([[any]]) :: [any]
   def concat(ll) do
-
+    reduce(ll, [], &(append(&1, &2)))
   end
 end
