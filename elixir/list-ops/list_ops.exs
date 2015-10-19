@@ -13,10 +13,7 @@ defmodule ListOps do
 
   @spec reverse(list) :: list
   def reverse(l) do
-
-  end
-  def reverse(l, output) do
-    [output | tl(l)]
+    reduce(l, [], &([&1 | &2]))
   end
 
   @spec map(list, (any -> any)) :: list
@@ -44,7 +41,8 @@ defmodule ListOps do
 
   @spec append(list, list) :: list
   def append(a, b) do
-    a ++ b
+    reduce(a, b, &([&1 | &2]))
+    |> reverse
   end
 
   @spec concat([[any]]) :: [any]
