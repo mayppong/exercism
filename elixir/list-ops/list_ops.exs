@@ -18,35 +18,38 @@ defmodule ListOps do
 
   @spec map(list, (any -> any)) :: list
   def map(l, f) do
-
+    reverse(l)
+    |> reduce([], &([f.(&1) | &2]))
   end
 
   @spec filter(list, (any -> as_boolean(term))) :: list
   def filter(l, f) do
-
+    reverse(l)
+    |> reduce([], fn(item, acc) ->
+      if f.(item) do
+        [item | acc]
+      else
+        acc
+      end
+    end)
   end
 
   @type acc :: any
   @spec reduce(list, acc, ((any, acc) -> acc)) :: acc
-  def reduce(l, acc, f) do
-    case l do
-      [] ->
-        acc
-      [item] ->
-        f.(item, acc)
-      [item | less] ->
-        f.(item, reduce(less, acc, f))
-    end
+  def reduce([], acc, f), do: acc
+  def reduce([item | less], acc, f) do
+    reduce(less, f.(item, acc), f)
   end
 
   @spec append(list, list) :: list
   def append(a, b) do
-    reduce(a, b, &([&1 | &2]))
-    |> reverse
+    reverse(a)
+    |> reduce(b, &([&1 | &2]))
   end
 
   @spec concat([[any]]) :: [any]
   def concat(ll) do
-    reduce(ll, [], &(append(&1, &2)))
+    reverse(ll)
+    |> reduce([], &(append(&1, &2)))
   end
 end
