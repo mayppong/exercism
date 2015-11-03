@@ -26,12 +26,8 @@ defmodule School do
   """
   @spec sort(Dict) :: Dict.t
   def sort(db) do
-    Enum.into(db, %{}, fn(grade) ->
-      {num, students} = grade
-      case students do
-        [_ | _] -> {num, Enum.sort(students)}
-        _ -> grade
-      end
+    Enum.into(db, %{}, fn({num, students}) ->
+      {num, Enum.sort(students)}
     end)
   end
 end
