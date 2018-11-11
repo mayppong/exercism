@@ -1,0 +1,8 @@
+version: "3"
+services:
+  test:
+    image: elixir:1.7-alpine
+    command: elixir
+    working_dir: /exercism
+    volumes:
+      - ./:/exercism
