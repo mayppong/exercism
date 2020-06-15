@@ -1,0 +1,8 @@
+version: "3"
+services:
+  test:
+    image: phpunit/phpunit:latest
+    command: phpunit
+    working_dir: /exercism
+    volumes:
+      - ./:/exercism
