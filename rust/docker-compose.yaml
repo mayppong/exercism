@@ -3,6 +3,6 @@ services:
   test:
     image: rust:1.44-slim
     command: cargo test
-    working_dir: /exercism/gigasecond
+    working_dir: /exercism
     volumes:
       - ./:/exercism
