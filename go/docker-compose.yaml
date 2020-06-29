@@ -1,0 +1,8 @@
+version: "3"
+services:
+  test:
+    image: golang:1.14-alpine
+    command: go test -v --bench . --benchmem
+    working_dir: /exercism
+    volumes:
+      - ./:/exercism
