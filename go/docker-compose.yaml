@@ -2,7 +2,7 @@ version: "3"
 services:
   test:
     image: golang:1.14-alpine
-    command: go test -v --bench . --benchmem
+    command: sh -c "go test -v --bench . --benchmem && gofmt -w ./"
     working_dir: /exercism
     volumes:
       - ./:/exercism
